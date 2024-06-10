@@ -5,7 +5,7 @@ export async function GET(
   { params }: { params: { topicId: string } }
 ) {
   const topics = await getStudyCardList(req, params);
-  return NextResponse.json({ date: topics, message: 'GET TOPIC' });
+  return NextResponse.json({ data: topics, message: 'TOPIC\'s cards' });
 }
 export async function POST() {
   return NextResponse.json({ message: 'POST TOPIC' });
