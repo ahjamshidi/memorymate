@@ -1,24 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Memory Mate
+
+Memory Mate is an web application. It's a flashcard application designed to supercharge your memorisation skills.
+Memory Mate is built using [Next.js](https://nextjs.org/) for both the frontend and backend, all written in TypeScript for type safety and scalability. For our database, we chose PostgreSQL, a powerful and reliable option, and Prisma as our ORM to seamlessly manage database operations. To ensure data validation, we used the Zod library, keeping our application robust and error-free. For a sleek and intuitive user interface.
 
 ## Getting Started
 
-First, run the development server:
+First, add a .env file in the root of project and add `DATABASE_URL` key with prober information of your database.
+
+Then run the development server:
 
 ```bash
+npm i
+npx prisma generate
+npx prisma migrate deploy
+npx prisma db seed
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can find all backend logic in `src/app/api`.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## App structure
+
+.
+├── prisma # database relatet files
+├── src # Source files ( back / front )
+├── app # application
+├── api # backend  
+ ├── component # front component
+├── constances
+├── controllers
+├── lib
+├── services # front api call
 
 ## Learn More
 
@@ -28,9 +42,3 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
