@@ -23,16 +23,18 @@ You can find all backend logic in `src/app/api`.
 
 ## App structure
 
-.
-├── prisma # database relatet files
-├── src # Source files ( back / front )
-├── app # application
-├── api # backend  
- ├── component # front component
-├── constances
-├── controllers
-├── lib
-├── services # front api call
+    .
+    ├── prisma                # database relatet files
+    ├── src                   # Source files ( back / front )
+    │   ├── app               # application
+    │       ├── api           # backend
+    │   ├── component         # front component
+    │   ├── constances         
+    │   └── controllers        
+    │   └── lib                
+    │   └── services          # front api call
+
+    
 
 ## Learn More
 
