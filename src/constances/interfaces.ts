@@ -15,10 +15,19 @@ export interface Card {
   updatedAt: Date;
   topicId: number;
   ownerId: number;
+  topic?:Topic;
 }
 export interface ChipData {
   key: number;
   label: string;
   subLable: string;
-  color: string;
+  color?:
+    | 'inherit'
+    | 'primary'
+    | 'secondary'
+    | 'warning'
+    | 'info'
+    | 'success'
+    | 'default'
+    | 'error';
 }

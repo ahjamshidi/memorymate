@@ -56,7 +56,8 @@ export default function Main() {
                     <Link href={'/flashcard/' + topic.id}>{topic.title}</Link>
                   </TableCell>
                   <TableCell align="right">
-                    {formatRelative(topic.updatedAt, new Date())}
+                    {topic.updatedAt?(formatRelative(topic.updatedAt, new Date())):'NEW'
+                    }
                   </TableCell>
                   <TableCell align="right">...</TableCell>
                 </TableRow>

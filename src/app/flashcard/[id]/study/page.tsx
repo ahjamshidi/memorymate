@@ -1,20 +1,31 @@
 'use client';
 import Flipcard from '@/components/flipcard/flipcard';
-import { getTopicsById } from '@/services/topic';
+import { getTopicsById, setCardReview } from '@/services/topic';
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
-import { ChipData } from '@/constances/interfaces';
+import { Card, ChipData } from '@/constances/interfaces';
 import CircularProgress from '@mui/material/CircularProgress';
 export default function Flashcard({ params }: { params: { id: number } }) {
-  const [cardList, setCardList] = React.useState([]);
-  const [currentCard, setCurrentCard] = React.useState({});
+  const initialCard: Card = {
+    id: 0,
+    front: '',
+    back: '',
+    reviewTime: null,
+    image: null,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    topicId: 0,
+    ownerId: 0,
+  };
+  const initialCardList: Card[] = [];
+  const [cardList, setCardList] = React.useState(initialCardList);
+  const [currentCard, setCurrentCard] = React.useState(initialCard);
   const [loading, setLoading] = React.useState(false);
   const [showAnswerFlag, setShowAnswerFlag] = React.useState(false);
-  let tmpCards = [];
   const showAnswer = () => {
     setShowAnswerFlag(!showAnswerFlag);
   };
@@ -28,7 +39,7 @@ export default function Flashcard({ params }: { params: { id: number } }) {
 
   React.useEffect(() => {
     getTopicsById(params.id).then((cards) => {
-      setCardList(cards);
+      setCardList(cards.data);
       setCurrentCard(getNextcard(cards.data));
       setLoading(true);
     });
@@ -42,11 +53,11 @@ export default function Flashcard({ params }: { params: { id: number } }) {
       return false;
     }
   };
-  const setHardnessLevel = () => {
-    console.log(currentCard);
+  const setHardnessLevel = (level: string) => {
+    setCardReview({ id: currentCard.id, level });
     setShowAnswerFlag(!showAnswerFlag);
     setTimeout(() => {
-      setCurrentCard(getNextcard(cardList.data));
+      setCurrentCard(getNextcard(cardList));
     }, 1000);
   };
   const ListItem = styled('li')(({ theme }) => ({
@@ -84,7 +95,9 @@ export default function Flashcard({ params }: { params: { id: number } }) {
                   <Chip
                     label={data.label}
                     color={data.color}
-                    onClick={setHardnessLevel}
+                    onClick={() => {
+                      setHardnessLevel(data.label);
+                    }}
                   />
                 </ListItem>
               );

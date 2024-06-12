@@ -3,15 +3,13 @@ import { Inter } from 'next/font/google';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
+
 import Grid from '@mui/material/Grid';
 import SimpleBottomNavigation from '@/components/bottomNavigation/bottomNavigation';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
+
 import theme from './theme';
 import './globals.css';
+import SimpleAppBar from '@/components/appBar/appBar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -31,22 +29,7 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <AppBar position="fixed">
-              <Toolbar>
-                <IconButton
-                  edge="start"
-                  color="inherit"
-                  aria-label="menu"
-                  sx={{ mr: 2 }}
-                  
-                >
-                  <ArrowBackIosNewRoundedIcon />
-                </IconButton>
-                <Typography variant="h6" sx={{ my: 2, flexGrow: 2 }}>
-                  Mm
-                </Typography>
-              </Toolbar>
-            </AppBar>
+            <SimpleAppBar></SimpleAppBar>
             <Grid
               container
               maxWidth={500}
@@ -55,6 +38,7 @@ export default function RootLayout({
               justifyContent="center"
               alignItems="end"
               height={'100%'}
+              margin={'auto'}
             >
               <Grid item xs={12} height={'100%'}>
                 <div className="main-content-container">{children}</div>

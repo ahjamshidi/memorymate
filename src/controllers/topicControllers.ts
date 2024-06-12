@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 const USERID = 1;
 export const getTopics = async (req: NextRequest, res: NextResponse) => {
   try {
-    const topics = await prisma.topic.findMany({ where: { ownerId: USERID } });
+    const topics = await prisma.topic.findMany({ where: { ownerId: USERID },orderBy:{updatedAt:'asc'} });
     return topics;
   } catch (error) {
     NextResponse.json({ error: 'Error fetching users' }, { status: 500 });

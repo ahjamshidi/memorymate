@@ -61,12 +61,15 @@ export default function FlashcardOverview({
             component="div"
           >
             last time study:
-            {formatDistance(
-              subDays(new Date(topicList?.data.lastReview), 3),
-              new Date(),
-              { addSuffix: true }
-            )}
+            {topicList?.data?.lastReview
+              ? formatDistance(
+                  subDays(new Date(topicList?.data?.lastReview), 3),
+                  new Date(),
+                  { addSuffix: true }
+                )
+              : 'First Time Study'}
           </Box>
+
           <Link href={'/flashcard/' + params.id + '/study'}>
             <Button
               sx={{ width: 'calc(100% - 40px)', mt: 2 }}
